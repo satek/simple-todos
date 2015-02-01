@@ -1,0 +1,51 @@
+<head>
+  <title>Todo List</title>
+</head>
+
+<body>
+  {{> todoList}}
+</body>
+
+<template name="todoList">
+<div class="container">
+  <header>
+    <h1>Todo List ({{incompleteCount}})</h1>
+    <div>
+      {{> loginButtons}}
+    </div>
+
+    <label class="hide-completed">
+      <input type="checkbox" checked="{{hideCompleted}}" />
+      Hide Completed Tasks
+    </label>
+    {{#if currentUser}}
+      {{#autoForm collection="Tasks" id="insertTaskForm" type="insert"}}
+        {{> afFieldInput name='text' placeholder='Type to add new tasks'}}
+      {{/autoForm}}
+    {{/if}}
+  </header>
+
+  <ul>
+    {{#each tasks}}
+    {{> task}}
+    {{/each}}
+  </ul>
+</div>
+</template>
+
+<template name="task">
+<li class="{{#if checked}}checked{{/if}} {{#if private}}private{{/if}}">
+<button class="delete">&times;</button>
+<input type="checkbox" checked="{{checked}}" class="toggle-checked" />
+<span class="text"><strong>{{username}}</strong> - {{text}}</span>
+{{#if isOwner}}
+<button class="toggle-private">
+  {{#if private}}
+  Private
+  {{else}}
+  Public
+  {{/if}}
+</button>
+{{/if}}
+</li>
+</template>
