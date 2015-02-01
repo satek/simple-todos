@@ -1,4 +1,6 @@
 .deploy
 .deploy/*
 
+# vim files
 *.swp
+*.swo
