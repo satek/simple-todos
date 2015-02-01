@@ -1,7 +1,5 @@
 Meteor.subscribe "tasks"
 
-AutoForm.debug()
-
 Template.todoList.helpers
   tasks: ->
     if Session.get "hideCompleted"
